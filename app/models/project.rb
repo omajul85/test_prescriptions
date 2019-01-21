@@ -2,6 +2,6 @@ class Project < ApplicationRecord
   has_many :tasks, dependent: :destroy
 
   def done?
-    tasks.empty?
+    tasks.all?(&:complete?)
   end
 end

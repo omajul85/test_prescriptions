@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:task) { Task.new }
+
+  it 'does not have a new task as complete' do
+    expect(task).not_to be_complete
+  end
 end
