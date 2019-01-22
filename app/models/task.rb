@@ -1,7 +1,11 @@
-class Task < ApplicationRecord
-  belongs_to :project
+class Task #< ApplicationRecord
+  # belongs_to :project
+  attr_accessor :size, :completed
 
-  @completed = false
+  def initialize(opts = {})
+    @size = opts[:size]
+    @completed = opts[:completed]
+  end
 
   def mark_completed
     @completed = true
