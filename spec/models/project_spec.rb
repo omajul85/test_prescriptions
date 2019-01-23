@@ -37,5 +37,27 @@ RSpec.describe Project, type: :model do
     it 'calculates remaining size' do
       expect(project.remaining_size).to eq(5)
     end
+
+    it 'knows its velocity' do
+      expect(project.completed_velocity).to eq(3)
+    end
+
+    it 'knows its rate' do
+      expect(project.current_rate).to eq(3.0 / 21)
+    end
+
+    it 'knows its projected days remaining' do
+      expect(project.projected_days_remaining).to eq(35)
+    end
+
+    it 'knows if it is not on schedule' do
+      project.due_date = 1.week.from.now
+      expect(project).not_to be_on_schedule
+    end
+
+    it 'knows if it is on schedule' do
+      project.due_date = 6.months.from.now
+      expect(project).to be_on_schedule
+    end
   end
 end
