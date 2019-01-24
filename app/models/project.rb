@@ -2,6 +2,10 @@ class Project #< ApplicationRecord
   # has_many :tasks, dependent: :destroy
   attr_accessor :tasks, :due_date
 
+  def self.velocity_length_in_days
+    21
+  end
+
   def initialize
     @tasks = []
   end
@@ -27,7 +31,7 @@ class Project #< ApplicationRecord
   end
 
   def current_rate
-    completed_velocity * 1.0 / 21
+    completed_velocity * 1.0 / Project.velocity_length_in_days
   end
 
   def projected_days_remaining
@@ -35,6 +39,7 @@ class Project #< ApplicationRecord
   end
 
   def on_schedule?
+    return false if projected_days_remaining.nan?
     (Time.zone.today + projected_days_remaining) <= due_date
   end
 end
