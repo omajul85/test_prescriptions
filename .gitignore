@@ -35,3 +35,4 @@ public/packs
 yarn-debug.log*
 yarn-error.log*
 .yarn-integrity
+coverage

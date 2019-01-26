@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 #---
 # Excerpted from "Rails 5 Test Prescriptions",
 # published by The Pragmatic Bookshelf.

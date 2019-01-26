@@ -20,6 +20,10 @@ gem "capistrano-rails", group: :development
 
 gem "awesome_print"
 gem "webpacker"
+gem 'simple_form'
+gem 'bootstrap-sass', '~> 3.4.0'
+gem 'sassc-rails', '>= 2.0.0'
+gem 'jquery-rails'
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
@@ -41,3 +45,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
+gem 'simplecov', require: false, group: :test
+gem "haml-rails", "~> 1.0"
