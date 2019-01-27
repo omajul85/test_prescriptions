@@ -319,6 +319,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   listen
+  pry
   pry-rails
   pry-rescue
   puma

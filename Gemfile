@@ -24,6 +24,7 @@ gem 'simple_form'
 gem 'bootstrap-sass', '~> 3.4.0'
 gem 'sassc-rails', '>= 2.0.0'
 gem 'jquery-rails'
+gem 'pry'
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
