@@ -8,6 +8,13 @@ class CreatesProject
 
   def build
     @project = Project.new(name: name)
+    project.tasks = convert_string_to_tasks
+    project
+  end
+
+  def create
+    build
+    project.save
   end
 
   def convert_string_to_tasks

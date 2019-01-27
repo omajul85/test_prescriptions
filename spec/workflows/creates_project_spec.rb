@@ -18,5 +18,55 @@ RSpec.describe CreatesProject do
       let(:task_string) { '' }
       specify { expect(tasks).to be_empty }
     end
+
+    describe 'with a single string' do
+      let(:task_string) { 'Clean the house' }
+      specify { expect(tasks.size).to eq(1) }
+      specify { expect(tasks.first).to have_attributes(
+              title: 'Clean the house', size: 1) }
+    end
+
+    describe 'with a single string with size' do
+      let(:task_string) { 'Clean the house:3' }
+      specify { expect(tasks.size).to eq(1) }
+      specify { expect(tasks.first).to have_attributes(
+              title: 'Clean the house', size: 3) }
+    end
+
+    describe 'with a single string with size 0' do
+      let(:task_string) { 'Clean the house:0' }
+      specify { expect(tasks.size).to eq(1) }
+      specify { expect(tasks.first).to have_attributes(
+              title: 'Clean the house', size: 1) }
+    end
+
+    describe 'with a single string with negative size' do
+      let(:task_string) { 'Clean the house:-3' }
+      specify { expect(tasks.size).to eq(1) }
+      specify { expect(tasks.first).to have_attributes(
+              title: 'Clean the house', size: 1) }
+    end
+
+    describe 'with a single string with malformed size' do
+      let(:task_string) { 'Clean the house:' }
+      specify { expect(tasks.size).to eq(1) }
+      specify { expect(tasks.first).to have_attributes(
+              title: 'Clean the house', size: 1) }
+    end
+
+    describe 'with a string with multiple tasks' do
+      let(:task_string) { 'Clean the house:2\nWalk the dog' }
+      specify { expect(tasks.size).to eq(2) }
+      specify { expect(tasks).to match(
+        [an_object_having_attributes(title: 'Clean the house', size: 2),
+         an_object_having_attributes(title: 'Walk the dog', size: 1)]) }
+    end
+
+    describe 'attaches tasks to the project' do
+      let(:task_string) { 'Clean the house:2\nWalk the dog' }
+      before(:example) { creator.create }
+      specify { expect(creator.project.tasks.size).to eq(2)}
+      specify { expect(creator.project).not_to be_a_new_record }
+    end
   end
 end
