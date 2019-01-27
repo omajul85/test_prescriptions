@@ -1,11 +1,12 @@
 %h1 Projects
 
-%table
-  %tbody
-    %tr
-      %td Project Name
-      %td Total Project Size
-    - @projects.each do |project|
+.table-responsive
+  %table.table.table-bordered
+    %tbody
       %tr
-        %td= project.name
-        %td= project.total_size
+        %th Project Name
+        %th Total Project Size
+      - @projects.each do |project|
+        %tr
+          %td= project.name
+          %td= project.total_size

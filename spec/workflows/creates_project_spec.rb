@@ -55,15 +55,16 @@ RSpec.describe CreatesProject do
     end
 
     describe 'with a string with multiple tasks' do
-      let(:task_string) { 'Clean the house:2\nWalk the dog' }
-      specify { expect(tasks.size).to eq(2) }
+      let(:task_string) { "Clean the house:2\r\nWalk the dog\r\nAnother:5" }
+      specify { expect(tasks.size).to eq(3) }
       specify { expect(tasks).to match(
         [an_object_having_attributes(title: 'Clean the house', size: 2),
-         an_object_having_attributes(title: 'Walk the dog', size: 1)]) }
+         an_object_having_attributes(title: 'Walk the dog', size: 1),
+         an_object_having_attributes(title: 'Another', size:5)]) }
     end
 
     describe 'attaches tasks to the project' do
-      let(:task_string) { 'Clean the house:2\nWalk the dog' }
+      let(:task_string) { "Clean the house:2\r\nWalk the dog" }
       before(:example) { creator.create }
       specify { expect(creator.project.tasks.size).to eq(2)}
       specify { expect(creator.project).not_to be_a_new_record }

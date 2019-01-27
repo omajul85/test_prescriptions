@@ -18,7 +18,7 @@ class CreatesProject
   end
 
   def convert_string_to_tasks
-    task_string.split('\n').map do |task|
+    task_string.split("\r\n").map do |task|
       title, size_string = task.split(':')
       Task.new(title: title, size: size_as_integer(size_string))
     end
