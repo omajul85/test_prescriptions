@@ -7,7 +7,8 @@ RSpec.describe 'adding a project', type: :system do
     fill_in 'project[:tasks]', with: "Choose fabric:3\r\nMake it work:5"
     click_on 'Create Project'
     visit projects_path
-    expect(page).to have_content('Project Runaway')
-    expect(page).to have_content(8)
+    @project = Project.find_by(name: 'Project Runaway')
+    expect(page).to have_selector("#project_#{@project.id} .name", text: 'Project Runaway')
+    expect(page).to have_selector("#project_#{@project.id} .total-size", text: '8')
   end
 end
