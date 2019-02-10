@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'adding a project', type: :system do
-    it 'allows a user to create a project with tasks' do
+  it 'allows a user to create a project with tasks' do
     visit new_project_path
     fill_in 'Name', with: 'Project Runaway'
     fill_in 'project[:tasks]', with: "Choose fabric:3\r\nMake it work:5"
@@ -10,5 +10,13 @@ RSpec.describe 'adding a project', type: :system do
     @project = Project.find_by(name: 'Project Runaway')
     expect(page).to have_selector("#project_#{@project.id} .name", text: 'Project Runaway')
     expect(page).to have_selector("#project_#{@project.id} .total-size", text: '8')
+  end
+
+  it 'does not allow a user to create a project without name' do
+    visit new_project_path
+    fill_in 'Name', with: ''
+    fill_in 'project[:tasks]', with: "Choose fabric:3\r\nMake it work:5"
+    click_on 'Create Project'
+    expect(page).to have_selector('.new_project')
   end
 end
