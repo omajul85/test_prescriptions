@@ -32,6 +32,7 @@ group :development, :test do
   gem "pry-rails"
   gem "pry-rescue"
   gem "rspec-rails"
+  gem "factory_bot_rails"
   gem "rubocop"
   gem "selenium-webdriver"
 end
