@@ -32,17 +32,17 @@ RSpec.describe Project, type: :model do
 
   describe 'estimates' do
     let(:project) { build_stubbed(:project, tasks: [newly_done, old_done, small_not_done, large_not_done]) }
-    let(:newly_done) { build_stubbed(:task, size: 3, completed_at: 2.days.ago) }
-    let(:old_done) { build_stubbed(:task, size: 2, completed_at: 3.months.ago) }
-    let(:small_not_done) { build_stubbed(:task, size: 1) }
-    let(:large_not_done) { build_stubbed(:task, size: 4) }
+    let(:newly_done) { build_stubbed(:task, :newly_complete) }
+    let(:old_done) { build_stubbed(:task, :long_complete) }
+    let(:small_not_done) { build_stubbed(:task, :small) }
+    let(:large_not_done) { build_stubbed(:task, :large) }
 
     it 'calculates total size' do
-      expect(project.total_size).to eq(10)
+      expect(project.total_size).to eq(12)
     end
 
     it 'calculates remaining size' do
-      expect(project.remaining_size).to eq(5)
+      expect(project.remaining_size).to eq(6)
     end
 
     it 'knows its velocity' do
@@ -54,7 +54,7 @@ RSpec.describe Project, type: :model do
     end
 
     it 'knows its projected days remaining' do
-      expect(project.projected_days_remaining).to eq(35)
+      expect(project.projected_days_remaining).to eq(42)
     end
 
     it 'knows if it is not on schedule' do
