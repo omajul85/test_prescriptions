@@ -19,4 +19,16 @@ RSpec.describe 'adding a project', type: :system do
     click_on 'Create Project'
     expect(page).to have_selector('.new_project')
   end
+
+  it 'behaves correctly in the event of a surprising DB failure' do
+    workflow = instance_spy(CreatesProject, success?: false, project: Project.new)
+    allow(CreatesProject).to receive(:new)
+      .with(name: 'Real Name', task_string: "Choose fabric:3\r\nMake it work:5")
+      .and_return(workflow)
+    visit new_project_path
+    fill_in 'Name', with: 'Real Name'
+    fill_in 'project[:tasks]', with: "Choose fabric:3\nMake it work:5"
+    click_on 'Create Project'
+    expect(page).to have_selector('.new_project')
+  end
 end
