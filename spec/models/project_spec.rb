@@ -67,4 +67,19 @@ RSpec.describe Project, type: :model do
       expect(project).to be_on_schedule
     end
   end
+
+  describe 'task order' do
+    let(:project) { create(:project, name: 'Project') }
+
+    it 'makes the order of the first task in an entry project' do
+      expect(project.next_task_order).to eq(1)
+    end
+
+    it 'makes the order of the next task one more than the highest' do
+      project.tasks.create(project_order: 1)
+      project.tasks.create(project_order: 2)
+      project.tasks.create(project_order: 3)
+      expect(project.next_task_order).to eq(4)
+    end
+  end
 end

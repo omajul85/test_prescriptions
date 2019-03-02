@@ -13,20 +13,20 @@ class CreatesProject
 
   def build
     @project = Project.new(name: name)
-    project.tasks = convert_string_to_tasks
-    project
+    @project.tasks = convert_string_to_tasks
+    @project
   end
 
   def create
     build
-    result = project.save
+    result = @project.save
     @success = result
   end
 
   def convert_string_to_tasks
     task_string.split("\r\n").map do |task|
       title, size_string = task.split(':')
-      Task.new(title: title, size: size_as_integer(size_string))
+      Task.new(project: @project, title: title, size: size_as_integer(size_string))
     end
   end
 

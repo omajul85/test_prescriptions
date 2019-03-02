@@ -8,5 +8,6 @@
         %th Total Project Size
       - @projects.each do |project|
         %tr{class: 'project-row', id: "#{dom_id(project)}"}
-          %td.name= project.name
+          %td.name
+            = link_to project.name, project_path(project)
           %td.total-size= project.total_size
