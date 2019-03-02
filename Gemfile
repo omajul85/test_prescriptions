@@ -29,6 +29,7 @@ gem 'pry'
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "capybara"
+  gem "capybara-screenshot"
   gem "pry-rails"
   gem "pry-rescue"
   gem "rspec-rails"
