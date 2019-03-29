@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :load_task, only: %[up down]
+  before_action :load_task, only: %i[up down]
 
   def create
     @project = Project.find(params[:task][:project_id])

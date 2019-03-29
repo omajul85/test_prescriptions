@@ -83,7 +83,6 @@ RSpec.describe CreatesProject do
         project = instance_spy(Project, save: false)
         allow(Project).to receive(:new).and_return(project)
         creator = CreatesProject.new(name: 'Name', task_string: "Task")
-        creator.create
         expect(creator).not_to be_a_success
       end
     end
